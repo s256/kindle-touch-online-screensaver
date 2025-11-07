@@ -31,8 +31,11 @@ currentTime () {
 # arguments: $1 - amount of seconds to wake up in
 set_rtc_wakeup()
 {
+	DEFER=3000000
+	lipc-set-prop -i com.lab126.powerd deferSuspend $DEFER 2>&1
 	lipc-set-prop -i com.lab126.powerd rtcWakeup $1 2>&1
 	logger "rtcWakeup has been set to $1"
+	logger "deferSuspend has been set to $DEFER"
 }
 
 ##############################################################################
